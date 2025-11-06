@@ -4,6 +4,14 @@ export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
+  safelist: [
+    {
+      pattern: /(bg|text|border)-(anemo|geo|hydro|pyro|cryo|electro|dendro)/,
+    },
+    {
+      pattern: /(bg|text|border)-(anemo|geo|hydro|pyro|cryo|electro|dendro)\/(10|20|30|40|50)/,
+    }
+  ],
   theme: {
     container: {
       center: true,
