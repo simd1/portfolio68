@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Genshin Impact Theme - Light Mode (UI Background) */
+    --background: 220 20% 12%;
+    --foreground: 48 100% 96%;
+
+    --card: 220 18% 16%;
+    --card-foreground: 48 100% 96%;
+
+    --popover: 220 20% 14%;
+    --popover-foreground: 48 100% 96%;
+
+    /* Anemo - Primary (Teal/Cyan) */
+    --primary: 175 70% 60%;
+    --primary-foreground: 220 20% 10%;
+
+    /* Geo - Secondary (Gold) */
+    --secondary: 45 95% 60%;
+    --secondary-foreground: 220 20% 10%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 48 20% 70%;
+
+    /* Hydro - Accent (Blue) */
+    --accent: 200 80% 55%;
+    --accent-foreground: 48 100% 96%;
+
+    /* Pyro - Destructive (Red/Orange) */
+    --destructive: 10 90% 60%;
+    --destructive-foreground: 48 100% 96%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 22%;
+    --ring: 175 70% 60%;
+
+    --radius: 0.75rem;
+
+    /* Elemental Colors */
+    --anemo: 175 70% 60%;
+    --geo: 45 95% 60%;
+    --hydro: 200 80% 55%;
+    --pyro: 10 90% 60%;
+    --cryo: 185 60% 70%;
+    --electro: 270 70% 65%;
+    --dendro: 120 50% 55%;
+
+    /* Gradients */
+    --gradient-anemo: linear-gradient(135deg, hsl(175 70% 60% / 0.2), hsl(185 80% 50% / 0.1));
+    --gradient-geo: linear-gradient(135deg, hsl(45 95% 60% / 0.2), hsl(35 90% 55% / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(220 18% 18%), hsl(220 18% 14%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 20% 12%), hsl(175 30% 15%));
+
+    /* Shadows & Glows */
+    --shadow-card: 0 8px 32px hsl(220 20% 5% / 0.6);
+    --shadow-glow-anemo: 0 0 30px hsl(175 70% 60% / 0.3);
+    --shadow-glow-geo: 0 0 30px hsl(45 95% 60% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    /* Dark mode uses same Genshin-inspired palette */
+    --background: 220 20% 10%;
+    --foreground: 48 100% 96%;
+
+    --card: 220 18% 14%;
+    --card-foreground: 48 100% 96%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 48 100% 96%;
+
+    --primary: 175 70% 60%;
+    --primary-foreground: 220 20% 8%;
+
+    --secondary: 45 95% 60%;
+    --secondary-foreground: 220 20% 8%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 48 20% 65%;
+
+    --accent: 200 80% 55%;
+    --accent-foreground: 48 100% 96%;
+
+    --destructive: 10 90% 60%;
+    --destructive-foreground: 48 100% 96%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 20%;
+    --ring: 175 70% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer utilities {
+  /* Genshin-style ornate borders */
+  .ornate-border {
+    @apply relative;
+    border: 2px solid hsl(var(--border));
+    background: linear-gradient(135deg, hsl(220 18% 18%), hsl(220 18% 14%));
+  }
+
+  .ornate-border::before {
+    content: '';
+    @apply absolute inset-0;
+    border: 1px solid hsl(var(--primary) / 0.3);
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* Elemental glow effects */
+  .glow-anemo {
+    box-shadow: 0 0 30px hsl(var(--anemo) / 0.3), 0 8px 32px hsl(220 20% 5% / 0.6);
+  }
+
+  .glow-geo {
+    box-shadow: 0 0 30px hsl(var(--geo) / 0.3), 0 8px 32px hsl(220 20% 5% / 0.6);
+  }
+
+  /* Vision card style */
+  .vision-card {
+    @apply ornate-border rounded-2xl p-6 backdrop-blur-sm;
+    background: linear-gradient(135deg, hsl(220 18% 18% / 0.9), hsl(220 18% 14% / 0.9));
+    transition: var(--transition-smooth);
+  }
+
+  .vision-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px hsl(220 20% 5% / 0.8), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+
+  /* Particle effect base */
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .particle {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Scroll fade in */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Element talent style button */
+  .talent-button {
+    @apply relative px-8 py-3 rounded-xl font-semibold;
+    @apply bg-gradient-to-r from-primary/20 to-accent/20;
+    @apply border-2 border-primary/50;
+    @apply text-foreground;
+    transition: var(--transition-smooth);
+  }
+
+  .talent-button:hover {
+    @apply border-primary;
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.4);
+    transform: scale(1.05);
+  }
+
+  /* Wish button (for resume download) */
+  .wish-button {
+    @apply relative px-10 py-4 rounded-2xl font-bold text-lg;
+    background: linear-gradient(135deg, hsl(var(--geo)), hsl(var(--secondary) / 0.8));
+    @apply text-background;
+    box-shadow: 0 8px 24px hsl(var(--geo) / 0.4);
+    transition: var(--transition-smooth);
+  }
+
+  .wish-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px hsl(var(--geo) / 0.6);
+  }
+}
